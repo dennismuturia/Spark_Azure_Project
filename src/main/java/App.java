@@ -6,15 +6,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.*;
 //We need to have this installed in your computer.
+import static spark.Spark.*;
 
-
-import static spark.Spark.get;
-import static spark.Spark.post;
-import static spark.Spark.staticFileLocation;
 
 public class App {
+    //Setting up the main
+    static int getAzureAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if azure-port isn't set (i.e. on localhost)
+    }
     //The main method
     public static void main(String args[]){
+        port(getAzureAssignedPort());
         staticFileLocation("public");
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
