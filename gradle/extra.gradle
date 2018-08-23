@@ -1,0 +1,7 @@
+//File extra.gradle
+buildscript {
+    repositories.jcenter()
+    dependencies.classpath 'com.bmuschko:gradle-docker-plugin:2.6.1'
+}
+
+apply plugin: com.bmuschko.gradle.docker.DockerRemoteApiPlugin
